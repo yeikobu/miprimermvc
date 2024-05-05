@@ -1,9 +1,7 @@
 <?php
 include('Conexion.php');
-class ModelCRUDJugador
-{
-    public function insertJugador($rut, $dv, $nombre, $fecnac, $apellido, $alias, $mail, $nacionalidad)
-    {
+class ModelCRUDJugador {
+    public function insertJugador($rut, $dv, $nombre, $fecnac, $apellido, $alias, $mail, $nacionalidad) {
         $query = "INSERT INTO `tbl_jugador`(`rut_jugador`, `vch_dv_jugador`, `vch_nombre_jugador`, `vch_apellido_jugador`, `date_fecha_nacimiento_jugador`, `vch_mail_jugador`, `vch_alias_jugador`, `vch_nacionalidad_jugador`) VALUES ('$rut','$dv','$nombre','$fecnac','$apellido','$alias','$mail','$nacionalidad')";
         $men = "";
         $streamConnection = Conexion::comenzarConexion();
@@ -22,8 +20,7 @@ class ModelCRUDJugador
         return $men;
     }
 
-    public function Searchjugador($nombre)
-    {
+    public function Searchjugador($nombre) {
         $query = "SELECT * FROM tbl_jugador WHERE VCH_NOMBRE_JUGADOR LIKE '%$nombre%'";
         $stringconnection = Conexion::comenzarConexion();
         $result = mysqli_query($stringconnection, $query);
