@@ -27,4 +27,50 @@ class ModelCRUDJugador {
         mysqli_close($stringconnection);
         return $result;
     }
+
+    public function deleteJugador($rut) { 
+        $query = "DELETE FROM tbl_jugador WHERE RUT_JUGADOR='$rut'";
+        $men = "";
+        $streamConnection = Conexion::comenzarConexion();
+        if (mysqli_query($streamConnection, $query)) {
+            $filas = mysqli_affected_rows($streamConnection);
+            if ($filas == 1) {
+                $men = "registro eliminado con exito";
+            } else {
+                $men = "No se pudo realizar eliminación";
+            }
+        } else {
+            $men = "fallo conexion";
+        }
+
+        mysqli_close($streamConnection);
+        return $men;
+    }
+
+    public function searchJugadorPorRut($rut) {
+        $query = "SELECT * FROM tbl_jugador WHERE RUT_JUGADOR = '$rut'";
+        $stringconnection = Conexion::comenzarConexion();
+        $result = mysqli_query($stringconnection, $query);
+        mysqli_close($stringconnection);
+        return $result;
+    }
+
+    public function updateJugador($rut, $nombre, $fecnac, $apellido, $alias, $mail, $nacionalidad) { 
+        $query = "UPDATE tbl_jugador SET RUT_JUGADOR='$rut',`VCH_NOMBRE_JUGADOR`='$nombre',`VCH_APELLIDO_JUGADOR`='$apellido',`DATE_FECHA_NACIMIENTO_JUGADOR`='$fecnac',`VCH_MAIL_JUGADOR`='$mail',`VCH_ALIAS_JUGADOR`='$alias',`VCH_NACIONALIDAD_JUGADOR`='$nacionalidad' WHERE RUT_JUGADOR='$rut'";
+        $men = "";
+        $streamConnection = Conexion::comenzarConexion();
+        if (mysqli_query($streamConnection, $query)) {
+            $filas = mysqli_affected_rows($streamConnection);
+            if ($filas == 1) {
+                $men = "registro actualizado con exito";
+            } else {
+                $men = "No se pudo realizar la actualización";
+            }
+        } else {
+            $men = "fallo conexion";
+        }
+
+        mysqli_close($streamConnection);
+        return $men;
+    }
 }
